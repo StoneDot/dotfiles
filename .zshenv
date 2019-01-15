@@ -1,6 +1,15 @@
 # PATH configuration
 export GOPATH=$HOME/workspace/go
-export PATH=$HOME/go/bin:$HOME/.zsh.d/commands:$GOPATH/bin:/opt/p4v/bin:$PATH
+if [ -d /opt/p4v/bin ]; then
+  PATH=/opt/p4v/bin:$PATH
+fi
+if [ -d $HOME/go/bin ]; then
+  PATH=$HOME/go/bin:$PATH
+fi
+if [ -d $HOME/.zsh.d/commands ]; then
+  PATH=$HOME/.zsh.d/commands:$PATH
+fi
+export PATH=$GOPATH/bin:$PATH
 export TERM=xterm-256color
 
 # For Intel MKL

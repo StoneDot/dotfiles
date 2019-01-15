@@ -17,7 +17,7 @@ POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Fuzzy finder [fzf]
-if [[ $OSTYPE = *darwin* && $(arch) = x86_64 ]]; then
+if [[ $OSTYPE = *darwin* && $(uname -m) = x86_64 ]]; then
   zplug "junegunn/fzf-bin", from:gh-r, as:command, \
     rename-to:fzf, use:"*darwin*amd64*"
 elif [[ $OSTYPE = *linux* && $(arch) = x86_64 ]]; then
@@ -27,14 +27,19 @@ fi
 # tmuxでfzfを使えるようにするプラグイン
 zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
 # dockerでfzfを使えるようにする
-source ~/.ghq/github.com/kwhrtsk/docker-fzf-completion/docker-fzf.zsh
+if [ -f "~/.ghq/github.com/kwhrtsk/docker-fzf-completion/docker-fzf.zsh" ]; then
+  source ~/.ghq/github.com/kwhrtsk/docker-fzf-completion/docker-fzf.zsh
+fi
 # Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
 zplug "junegunn/fzf", use:shell/key-bindings.zsh
 # cd **[TAB], vim **[TAB]などでファイル名を補完できる
 zplug "junegunn/fzf", use:shell/completion.zsh
 
 # next generation ls [exa]
-if [[ $OSTYPE = *linux* && $(arch) = x86_64 ]]; then
+if [[ $OSTYPE = *darwin* && $(uname -m) = x86_64 ]]; then
+  zplug "ogham/exa", from:gh-r, as:command, \
+    rename-to:exa, use:"*macos*x86_64*"
+elif [[ $OSTYPE = *linux* && $(arch) = x86_64 ]]; then
   zplug "ogham/exa", from:gh-r, as:command, \
     rename-to:exa, use:"*linux*x86_64*"
 fi
@@ -93,10 +98,12 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 setopt auto_list list_packed
 
 # Colorize basic commands
-eval "`dircolors -b`"
-if exa &> /dev/null ; then
+if exa &> /dev/null; then
   alias ls='exa'
 else
+  if dircolors -b &> /dev/null; then
+    eval "`dircolors -b`"
+  fi
   alias ls='ls --color=auto'
 fi
 alias dir='dir --color=auto'
@@ -183,10 +190,14 @@ source ~/.zsh.d/ghq-cd.zsh
 source ~/.zsh.d/gimages.zsh
 
 # For kubectl
-source <(kubectl completion zsh)
+if kubectl &> /dev/null; then
+  source <(kubectl completion zsh)
+fi
 
 # For stern
-source <(stern --completion=zsh)
+if stern &> /dev/null; then
+  source <(stern --completion=zsh)
+fi
 
 ## Invoke the ``dired'' of current working directory in Emacs buffer.
 function dired () {
@@ -217,7 +228,12 @@ function cde () {
 # Add ssh key if not added yet.
 if [ -S "$SSH_AUTH_SOCK" ]; then
   if ! ssh-add -l > /dev/null; then
-    ssh-add "$HOME/.ssh/id_rsa"
+    if [ -f "$HOME/.ssh/id_rsa ]; then
+      ssh-add "$HOME/.ssh/id_rsa"
+    fi
+    if [ -f "$HOME/.ssh/id_rsa_priv ]; then
+      ssh-add "$HOME/.ssh/id_rsa_priv"
+    fi
   fi
 fi
 
