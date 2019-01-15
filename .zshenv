@@ -1,4 +1,7 @@
 # PATH configuration
+if [ -x /usr/libexec/path_helper ]; then
+	eval `/usr/libexec/path_helper -s`
+fi
 export GOPATH=$HOME/workspace/go
 if [ -d /opt/p4v/bin ]; then
   PATH=/opt/p4v/bin:$PATH
