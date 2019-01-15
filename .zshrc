@@ -228,10 +228,10 @@ function cde () {
 # Add ssh key if not added yet.
 if [ -S "$SSH_AUTH_SOCK" ]; then
   if ! ssh-add -l > /dev/null; then
-    if [ -f "$HOME/.ssh/id_rsa ]; then
+    if [ -f "$HOME/.ssh/id_rsa" ]; then
       ssh-add "$HOME/.ssh/id_rsa"
     fi
-    if [ -f "$HOME/.ssh/id_rsa_priv ]; then
+    if [ -f "$HOME/.ssh/id_rsa_priv" ]; then
       ssh-add "$HOME/.ssh/id_rsa_priv"
     fi
   fi
