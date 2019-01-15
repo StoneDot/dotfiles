@@ -12,6 +12,8 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context kubecontext dir newline vcs)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="072"
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="007"
 
 # Syntax highlight for zsh [zsh-syntax-highlighting]
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
