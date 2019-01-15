@@ -1,0 +1,3 @@
+#! /bin/zsh
+source ~/.zsh.d/lib_open_via_emacs.sh
+open_via_emacs_async $*
