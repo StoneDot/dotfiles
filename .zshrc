@@ -10,7 +10,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Prompt theme [powerlevel9k]
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context kubecontext dir newline vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir newline vcs)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="072"
 POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="007"
@@ -100,12 +100,12 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 setopt auto_list list_packed
 
 # Colorize basic commands
-if exa &> /dev/null; then
-  alias ls='exa'
+if dircolors -b &> /dev/null; then
+  eval "`dircolors -b`"
+fi
+if [ $OS = 'OSX' ]; then
+  alias ls='ls -G'
 else
-  if dircolors -b &> /dev/null; then
-    eval "`dircolors -b`"
-  fi
   alias ls='ls --color=auto'
 fi
 alias dir='dir --color=auto'
