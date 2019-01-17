@@ -1,0 +1,2 @@
+#!/bin/zsh
+cat ~/.kube/config | egrep '^current-context' | awk '{print $2}'
