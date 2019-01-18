@@ -100,13 +100,17 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 setopt auto_list list_packed
 
 # Colorize basic commands
-if dircolors -b &> /dev/null; then
+if exa &> /dev/null; then
+  alias ls=exa
+elif dircolors -b &> /dev/null; then
   eval "`dircolors -b`"
 fi
-if [ $OS = 'OSX' ]; then
-  alias ls='ls -G'
-else
-  alias ls='ls --color=auto'
+if ! exa &> /dev/null; then
+  if [ $OS = 'OSX' ]; then
+    alias ls='ls -G'
+  else
+    alias ls='ls --color=auto'
+  fi
 fi
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
