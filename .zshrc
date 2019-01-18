@@ -126,7 +126,9 @@ alias -g W="| wc"
 alias -g S="| sed"
 alias -g A="| ask"
 alias e='open_via_emacs_async'
-alias pbcopy='xsel --clipboard --input'
+if [ $OS != 'OSX' ]; then
+  alias pbcopy='xsel --clipboard --input'
+fi
 alias pbpaste='xsel --clipboard --output'
 alias cmakedebug='cmake -DCMAKE_BUILD_TYPE=Debug'
 alias cmakerelease='cmake -DCMAKE_BUILD_TYPE=Release'
