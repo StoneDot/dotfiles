@@ -145,7 +145,7 @@ abbrev-alias gs="git status -s"
 abbrev-alias gb="git branch"
 abbrev-alias gcb="git checkout -b"
 abbrev-alias -f gp="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
-abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
+abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin "
 
 # docker
 alias docker='sudo docker'
