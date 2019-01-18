@@ -137,9 +137,10 @@ alias cmakereleaseicpc='cmakerelease -DCMAKE_CXX_COMPILER=icpc'
 alias cmakedebugclang++='cmakedebug -DCMAKE_CXX_COMPILER=clang++'
 alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 # git
-abbrev-alias gpl="git pull"
-abbrev-alias gps="git push"
 abbrev-alias gs="git status -s"
+abbrev-alias gcb="git checkout -b"
+abbrev-alias -f gp="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
+abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
 
 # docker
 alias docker='sudo docker'
@@ -179,6 +180,14 @@ function splotl() {
     for file in $@; do
         gnuplot -p -e "splot '$file' w lines" 
     done
+}
+
+# For git
+function gc () {
+    local branches branch
+    branches=$(git branch -vv) &&
+    branch=$(echo "$branches" | fzf) &&
+    git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //')
 }
 
 # For Emacs
