@@ -190,8 +190,12 @@ function splotl() {
 # For git
 function gc () {
     local branches branch
-    branches=$(git branch -vv) &&
-    branch=$(echo "$branches" | fzf +m) &&
+    branches=$(git branch) &&
+    if [ -n "$1" ]; then
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse -q $1) || return $?
+    else
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse) || return $?
+    fi
     git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //')
 }
 
