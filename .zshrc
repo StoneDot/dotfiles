@@ -132,8 +132,8 @@ alias -g A="| ask"
 alias e='open_via_emacs_async'
 if [ $OS != 'OSX' ]; then
   alias pbcopy='xsel --clipboard --input'
+  alias pbpaste='xsel --clipboard --output'
 fi
-alias pbpaste='xsel --clipboard --output'
 alias cmakedebug='cmake -DCMAKE_BUILD_TYPE=Debug'
 alias cmakerelease='cmake -DCMAKE_BUILD_TYPE=Release'
 alias cmakedebugicpc='cmakedebug -DCMAKE_CXX_COMPILER=icpc'
