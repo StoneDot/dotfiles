@@ -144,6 +144,7 @@ alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 abbrev-alias gs="git status -s"
 abbrev-alias gb="git branch"
 abbrev-alias gcb="git checkout -b"
+abbrev-alias gd="git diff --histogram --indent-heuristic"
 abbrev-alias -f gp="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
 abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin "
 
