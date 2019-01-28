@@ -142,11 +142,13 @@ alias cmakedebugclang++='cmakedebug -DCMAKE_CXX_COMPILER=clang++'
 alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 # git
 abbrev-alias gs="git status -s"
-abbrev-alias gb="git branch"
+abbrev-alias gb="git branch -vv"
 abbrev-alias gcb="git checkout -b"
 abbrev-alias gd="git diff --histogram --indent-heuristic"
-abbrev-alias -f gp="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
+abbrev-alias -f gpull="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
 abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin "
+# tidy
+abbrev-alias tidy="tidy -utf8"
 
 # docker
 alias docker='sudo docker'
