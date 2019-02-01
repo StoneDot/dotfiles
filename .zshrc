@@ -1,5 +1,10 @@
 # Lines configured by zsh-newuser-install
 
+# Load zprofile
+if [[ -f ${HOME}/.zprofile ]]; then
+  source ${HOME}/.zprofile
+fi
+
 #--------------------------------------------------
 # zplug
 #--------------------------------------------------
