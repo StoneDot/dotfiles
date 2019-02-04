@@ -207,6 +207,17 @@ function gc () {
     git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //')
 }
 
+function gcr() {
+    local branches branch
+    branches=$(git branch -a) &&
+    if [[ -n "$1" ]]; then
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse -q $1) || return $?
+    else
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse) || return $?
+    fi
+    git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //' | sed 's$remotes/origin/$$')
+}
+
 # For Emacs
 source ~/.zsh.d/lib_open_via_emacs.sh
 
