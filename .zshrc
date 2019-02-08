@@ -150,7 +150,7 @@ alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 abbrev-alias gs="git status -s"
 abbrev-alias gb="git branch -vv"
 abbrev-alias gcb="git checkout -b"
-abbrev-alias gd="git diff --histogram --indent-heuristic"
+abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change"
 abbrev-alias -f gpull="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
 abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin "
 # tidy
@@ -161,8 +161,9 @@ alias docker='sudo docker'
 alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo docker rm"
 abbrev-alias dp="docker ps -a"
 abbrev-alias di="docker images"
-abbrev-alias dr="docker run"
+abbrev-alias dr="docker run --rm"
 abbrev-alias de="docker exec"
+abbrev-alias dc="docker-compose"
 
 # kubernetes
 abbrev-alias k="kubectl"
