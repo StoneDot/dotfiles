@@ -148,7 +148,6 @@ alias cmakedebugclang++='cmakedebug -DCMAKE_CXX_COMPILER=clang++'
 alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 # git
 abbrev-alias gs="git status -s"
-abbrev-alias gb="git branch -vv"
 abbrev-alias gcb="git checkout -b"
 abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change"
 abbrev-alias -f gpull="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
@@ -220,6 +219,30 @@ function gcr() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //' | sed 's$remotes/origin/$$')
 }
 
+function gbd() {
+    local branches branch
+    branches=$(git branch) &&
+    if [ -n "$1" ]; then
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse -q $1) || return $?
+    else
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse) || return $?
+    fi
+    branch=$(echo "$branch" | awk '{print $1}' | sed 's/.* //')
+    git push origin :$branch
+    git branch -d $branch
+}
+
+function gb() {
+    local branches
+    branches=$(git branch -vv) &&
+    if [ -n "$1" ]; then
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse -q $1) || return $?
+    else
+        branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse) || return $?
+    fi
+    echo "$branch" | awk '{print $1}'| sed 's/.* //' | sed "s/\n//" | pbcopy
+}
+
 # For Emacs
 source ~/.zsh.d/lib_open_via_emacs.sh
 
@@ -289,3 +312,8 @@ if [ -f '/home/goto/google-cloud-sdk/path.zsh.inc' ]; then . '/home/goto/google-
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/goto/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/goto/google-cloud-sdk/completion.zsh.inc'; fi
+
+# The next lines enable nvm commands and completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
