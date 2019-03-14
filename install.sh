@@ -18,6 +18,16 @@ if [ $(uname) == "Darwin" ]; then
   # Install kubectx/kubens
   brew install kubectx
 
+  # Install tools
+  brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv
+  brew tap wagoodman/dive
+  brew install dive
+  brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git
+  brew install ripgrep-bin
+  brew install yarn --ignore-dependencies
+  brew cask install java
+  brew install plantuml
+
   # Install zplug
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
