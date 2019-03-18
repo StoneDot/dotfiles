@@ -240,7 +240,11 @@ function gb() {
     else
         branch=$(echo "$branches" | fzf +m --ansi --height 40% --reverse) || return $?
     fi
-    echo "$branch" | awk '{print $1}'| sed 's/.* //' | sed "s/\n//" | pbcopy
+    echo "$branch" | sed 's/\* *//' | awk '{print $1}' | sed 's/.* //' | sed "s/\n//" | perl -pe 'chomp' | pbcopy
+}
+
+function gcopy() {
+    git symbolic-ref --short HEAD | perl -pe 'chomp' | pbcopy
 }
 
 # For Emacs
