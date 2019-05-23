@@ -156,11 +156,13 @@ abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short 
 abbrev-alias tidy="tidy -utf8"
 
 # docker
-alias docker='sudo docker'
+if [ $OS != 'OSX' ]; then
+  alias docker='sudo docker'
+fi
 alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo docker rm"
 abbrev-alias dp="docker ps -a"
 abbrev-alias di="docker images"
-abbrev-alias dr="docker run --rm"
+abbrev-alias dr="docker run --rm -ti"
 abbrev-alias de="docker exec"
 abbrev-alias dc="docker-compose"
 
@@ -311,18 +313,20 @@ fi
 # Environment
 export SVN_EDITOR=/usr/bin/vim
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/goto/google-cloud-sdk/path.zsh.inc' ]; then . '/home/goto/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/goto/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/goto/google-cloud-sdk/completion.zsh.inc'; fi
-
 # The next lines enable nvm commands and completion
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+
+# Load rbenv settings
+if which rbenv &> /dev/null; then
+  eval "$(rbenv init -)"
+  export PATH="${HOME}/.rbenv/bin:${PATH}"
+fi
+
 # Set editor settings if exists vim
 if which vim &> /dev/null; then
   export EDITOR=vim
 fi
+
