@@ -14,7 +14,6 @@ if [ -d $HOME/.zsh.d/commands ]; then
 fi
 export PATH=$GOPATH/bin:$PATH
 export TERM=xterm-256color
-export SHELL=/usr/local/bin/zsh
 
 # For Intel MKL
 if [[ -e /opt/intel/bin/compilervars.sh ]]; then
