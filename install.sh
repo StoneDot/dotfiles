@@ -54,3 +54,8 @@ CURRENT_DIR=$(cd $(dirname $0) | pwd)
 ln -s ${CURRENT_DIR}/.zshrc ${HOME}/.zshrc
 ln -s ${CURRENT_DIR}/.zshenv ${HOME}/.zshenv
 ln -s ${CURRENT_DIR}/.zsh.d ${HOME}/.zsh.d
+ln -s ${CURRENT_DIR}/.vimrc ${HOME}/.vimrc
+
+
+# Install vim extensions
+vim +PluginInstall +qall
