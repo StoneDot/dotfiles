@@ -39,6 +39,11 @@ if [ $(uname) == "Darwin" ]; then
 
   # Reload PATH environment
   eval `/usr/libexec/path_helper -s`
+elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
+  sudo apt install vim git zsh
+
+  # Install nvm
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 fi
 
 # Return to original directory
