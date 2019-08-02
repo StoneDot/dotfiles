@@ -165,7 +165,7 @@ alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo doc
 abbrev-alias dp="docker ps -a"
 abbrev-alias di="docker images"
 abbrev-alias dr="docker run --rm -ti"
-abbrev-alias de="docker exec"
+abbrev-alias de="docker exec -ti"
 abbrev-alias dc="docker-compose"
 
 # kubernetes
