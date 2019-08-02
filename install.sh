@@ -5,18 +5,9 @@ pushd $HOME
 
 if [ $(uname) == "Darwin" ]; then
   # Is MacOS
-  # Install zsh
+  # Install zsh fzf, stern, kubectx/kubens, renger
   brew update
-  brew install zsh
-
-  # Install fzf
-  brew install fzf
-
-  # Install stern
-  brew install stern
-
-  # Install kubectx/kubens
-  brew install kubectx
+  brew install zsh fzf stern kubectx ranger
 
   # Install tools
   brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv
@@ -32,7 +23,7 @@ if [ $(uname) == "Darwin" ]; then
   curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 
   # Install go lang
-  GO_INSTALLER=go1.11.4.darwin-amd64.pkg
+  GO_INSTALLER=go1.12.7.darwin-amd64.pkg
   curl -sL -O https://dl.google.com/go/${GO_INSTALLER}
   sudo installer -pkg ${GO_INSTALLER} -target /
 
