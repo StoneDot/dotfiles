@@ -21,7 +21,8 @@ Plugin 'L9'
 Plugin 'FuzzyFinder'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'prettier/vim-prettier'
-Plugin 'tomasr/molokai'
+Plugin 'challenger-deep-theme/vim', { 'name': 'challenger-deep' }
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +41,10 @@ filetype plugin indent on    " required
 
 
 " General setting
+" True Color を有効化
+if has('nvim') || has('termguicolors')
+  set termguicolors
+endif
 " 文字コードをUFT-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
@@ -106,11 +111,11 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 imap <C-f> <Right>
 imap <C-b> <Left>
 " カラーテーマの設定
-colorscheme molokai
+colorscheme challenger_deep
 " Indent のカラーリング
-let g:indent_guides_enable_on_vim_startup = 1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#191829 ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b3959 ctermbg=4
 hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgrey
 
