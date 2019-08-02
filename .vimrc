@@ -22,7 +22,9 @@ Plugin 'FuzzyFinder'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'prettier/vim-prettier'
 Plugin 'challenger-deep-theme/vim', { 'name': 'challenger-deep' }
-
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'junegunn/fzf', { 'rtp': 'plugin' }
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -38,6 +40,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" Enable package
+packadd! matchit
 
 
 " General setting
@@ -74,9 +79,6 @@ set showmatch
 set laststatus=2
 " コマンドラインの補完
 set wildmode=list:longest
-" 折り返し時に表示行単位での移動できるようにする
-nnoremap j gj
-nnoremap k gk
 " Backspaceでスペース等も消せるように
 set backspace=2
 " シンタックスハイライトを有効化
@@ -119,6 +121,11 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#3b3959 ctermbg=4
 hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=darkgrey
 
+" NERDTree
+let NERDTreeShowHidden = 1
+" C-e で NERDTree へ移動
+nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
+let g:nerdtree_tabs_open_on_console_startup=1
 
 " FuzzyFinder
 let g:fuf_modesDisable = []
@@ -129,6 +136,25 @@ nnoremap <C-j>f :FufFile<CR>
 nnoremap <C-j>r :FufMruFile<CR>
 nnoremap <C-j>b :FufBuffer<CR>
 
+" Mouse
+if has('mouse')
+  set mouse=a
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  elseif v:version > 703 || v:version is 703 && has('patch632')
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  endif
+endif
+
+" Fzf
+nnoremap <silent> sf :GFiles<CR>
+nnoremap <silent> sF :GFiles?<CR>
+nnoremap <silent> sb :Buffers<CR>
+nnoremap <silent> sl :BLines<CR>
+nnoremap <silent> sh :History<CR>
+nnoremap <silent> sm :Mark<CR>
 
 " TypeScript
 autocmd BufRead,BufNewFile *.ts set filetype=typescript
