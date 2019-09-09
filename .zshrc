@@ -154,6 +154,7 @@ abbrev-alias -f gpull="git status -uno &> /dev/null && git symbolic-ref --short 
 abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin "
 abbrev-alias -f gupull="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull upstream "
 abbrev-alias -f gupush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push upstream "
+abbrev-alias groot="cd $(git rev-parse --show-toplevel)"
 # tidy
 abbrev-alias tidy="tidy -utf8"
 
