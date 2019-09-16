@@ -13,8 +13,11 @@ source ~/.zplug/init.zsh
 # Self management [zplug]
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
+# Prompt theme [powerlevel10k]
+zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme
+
 # Prompt theme [powerlevel9k]
-zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
+# zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme
 POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-aheadbehind git-remotebranch git-tagname)
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir newline vcs)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
@@ -25,10 +28,10 @@ POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="007"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Fuzzy finder [fzf]
-if [[ $OSTYPE = *darwin* && $(uname -m) = x86_64 ]]; then
+if [[ "$OSTYPE" = *darwin* && $(uname -m) = x86_64 ]]; then
   zplug "junegunn/fzf-bin", from:gh-r, as:command, \
     rename-to:fzf, use:"*darwin*amd64*"
-elif [[ $OSTYPE = *linux* && $(arch) = x86_64 ]]; then
+elif [[ "$OSTYPE" = *linux* && $(arch) = x86_64 ]]; then
   zplug "junegunn/fzf-bin", from:gh-r, as:command, \
     rename-to:fzf, use:"*linux*amd64*"
 fi
@@ -44,10 +47,10 @@ zplug "junegunn/fzf", use:shell/key-bindings.zsh
 zplug "junegunn/fzf", use:shell/completion.zsh
 
 # next generation ls [exa]
-if [[ $OSTYPE = *darwin* && $(uname -m) = x86_64 ]]; then
+if [[ "$OSTYPE" = *darwin* && $(uname -m) = x86_64 ]]; then
   zplug "ogham/exa", from:gh-r, as:command, \
     rename-to:exa, use:"*macos*x86_64*"
-elif [[ $OSTYPE = *linux* && $(arch) = x86_64 ]]; then
+elif [[ "$OSTYPE" = *linux* && $(arch) = x86_64 ]]; then
   zplug "ogham/exa", from:gh-r, as:command, \
     rename-to:exa, use:"*linux*x86_64*"
 fi
@@ -112,7 +115,7 @@ elif dircolors -b &> /dev/null; then
   eval "`dircolors -b`"
 fi
 if ! exa &> /dev/null; then
-  if [ $OS = 'OSX' ]; then
+  if [ "$OS" = 'OSX' ]; then
     alias ls='ls -G'
   else
     alias ls='ls --color=auto'
@@ -136,7 +139,7 @@ alias -g W="| wc"
 alias -g S="| sed"
 alias -g A="| ask"
 alias e='open_via_emacs_async'
-if [ $OS != 'OSX' ]; then
+if [ "$OS" != 'OSX' ]; then
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
 fi
@@ -150,16 +153,16 @@ alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 abbrev-alias gs="git status -s"
 abbrev-alias gcb="git checkout -b"
 abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change"
-abbrev-alias -f gpull="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin "
-abbrev-alias -f gpush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin "
-abbrev-alias -f gupull="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull upstream "
-abbrev-alias -f gupush="git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push upstream "
-abbrev-alias groot="cd $(git rev-parse --show-toplevel)"
+abbrev-alias -g -e gpull="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin )"
+abbrev-alias -g -e gpush="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin )"
+abbrev-alias -g -e gupull="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull upstream )"
+abbrev-alias -g -e gupush="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push upstream )"
+abbrev-alias -g -e groot="\$(git rev-parse --show-toplevel 2> /dev/null)"
 # tidy
 abbrev-alias tidy="tidy -utf8"
 
 # docker
-if [ $OS != 'OSX' ]; then
+if [ "$OS" != 'OSX' ]; then
   alias docker='sudo docker'
 fi
 alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo docker rm"
