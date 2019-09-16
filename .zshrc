@@ -15,11 +15,8 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Prompt theme [powerlevel10k]
 zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme
-POWERLEVEL9K_VCS_GIT_HOOKS=(vcs-detect-changes git-aheadbehind git-remotebranch git-tagname)
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir newline vcs)
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="072"
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND="007"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.zsh.d/p10k.zsh ]] && source ~/.zsh.d/p10k.zsh
 
 # Syntax highlight for zsh [zsh-syntax-highlighting]
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -251,6 +248,7 @@ function gb() {
 function gcopy() {
     git symbolic-ref --short HEAD | perl -pe 'chomp' | pbcopy
 }
+
 
 # For Emacs
 source ~/.zsh.d/lib_open_via_emacs.sh
