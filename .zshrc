@@ -173,6 +173,9 @@ abbrev-alias me="microk8s.enable"
 abbrev-alias mstop="sudo microk8s.stop"
 abbrev-alias mstart="sudo microk8s.start"
 
+# ansible
+abbrev-alias ap="ansible-playbook --inventory-file=/usr/local/bin/terraform-inventory"
+
 # For gnuplot
 function plot () {
     for file in $@; do
