@@ -32,10 +32,16 @@ if [ $(uname) == "Darwin" ]; then
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
   sudo apt install vim git zsh
+  if which gnome-session &> /dev/null; then
+    sudo apt install vim-gnome
+  fi
 
   # Install nvm
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 fi
+
+# Install zplugin
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 
 # Return to original directory
 popd

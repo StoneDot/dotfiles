@@ -6,80 +6,61 @@ if [[ -f ${HOME}/.zprofile ]]; then
 fi
 
 #--------------------------------------------------
-# zplug
+# zplugin
 #--------------------------------------------------
-source ~/.zplug/init.zsh
-
-# Self management [zplug]
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+### Added by Zplugin's installer
+source "${HOME}/.zplugin/bin/zplugin.zsh"
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### End of Zplugin installer's chunk
 
 # Prompt theme [powerlevel10k]
-zplug romkatv/powerlevel10k, use:powerlevel10k.zsh-theme
+zplugin light romkatv/powerlevel10k
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.zsh.d/p10k.zsh ]] && source ~/.zsh.d/p10k.zsh
 
-# Syntax highlight for zsh [zsh-syntax-highlighting]
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
 # Fuzzy finder [fzf]
-if [[ "$OSTYPE" = *darwin* && $(uname -m) = x86_64 ]]; then
-  zplug "junegunn/fzf-bin", from:gh-r, as:command, \
-    rename-to:fzf, use:"*darwin*amd64*"
-elif [[ "$OSTYPE" = *linux* && $(arch) = x86_64 ]]; then
-  zplug "junegunn/fzf-bin", from:gh-r, as:command, \
-    rename-to:fzf, use:"*linux*amd64*"
-fi
-# tmuxでfzfを使えるようにするプラグイン
-zplug "junegunn/fzf", as:command, use:bin/fzf-tmux
+zplugin ice from"gh-r" as"program" mv"fzf* -> fzf"
+zplugin load junegunn/fzf-bin
+
 # dockerでfzfを使えるようにする
-if [ -f "~/.ghq/github.com/kwhrtsk/docker-fzf-completion/docker-fzf.zsh" ]; then
-  source ~/.ghq/github.com/kwhrtsk/docker-fzf-completion/docker-fzf.zsh
-fi
+zplugin ice pick"docker-fzf.zsh"
+zplugin load kwhrtsk/docker-fzf-completion
+
+# tmuxでfzfを使えるようにするプラグイン
+zplugin ice as"program" cp"bin/fzf-tmux -> fzf-tmuz"
+
 # Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
-zplug "junegunn/fzf", use:shell/key-bindings.zsh
 # cd **[TAB], vim **[TAB]などでファイル名を補完できる
-zplug "junegunn/fzf", use:shell/completion.zsh
+zplugin ice depth"1" multisrc"shell/key-bindings.zsh shell/completion.zsh"
+zplugin load junegunn/fzf
 
 # next generation ls [exa]
-if [[ "$OSTYPE" = *darwin* && $(uname -m) = x86_64 ]]; then
-  zplug "ogham/exa", from:gh-r, as:command, \
-    rename-to:exa, use:"*macos*x86_64*"
-elif [[ "$OSTYPE" = *linux* && $(arch) = x86_64 ]]; then
-  zplug "ogham/exa", from:gh-r, as:command, \
-    rename-to:exa, use:"*linux*x86_64*"
-fi
+zplugin ice as"program" mv"exa* -> exa"
+zplugin load ogham/exa
 
 # Auto suggestion [zsh-autosuggestions]
-zplug "zsh-users/zsh-autosuggestions"
+zplugin light "zsh-users/zsh-autosuggestions"
 
 # Auto complete [zsh-completions]
-zplug "zsh-users/zsh-completions"
+zplugin light "zsh-users/zsh-completions"
 
 # cd enhance [enhancd]
-zplug "b4b4r07/enhancd", use:init.sh
+zplugin ice pick "init.sh"
+zplugin load "b4b4r07/enhancd"
 
 # cd to top directory of git []
-zplug "mollifier/cd-gitroot"
+zplugin light "mollifier/cd-gitroot"
 alias cdu='cd-gitroot'
 
 # zsh 256color [zsh-256color]
-zplug "chrissicool/zsh-256color"
+zplugin light "chrissicool/zsh-256color"
 
 # zsh abbrev alias
-zplug "momo-lab/zsh-abbrev-alias"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Then, source plugins and add commands to $PATH
-zplug load
+zplugin light "momo-lab/zsh-abbrev-alias"
 
 # Maximum history size 1M
+
 HISTFILE=~/.histfile
 HISTSIZE=1000000
 SAVEHIST=1000000
@@ -333,4 +314,7 @@ fi
 if which vim &> /dev/null; then
   export EDITOR=vim
 fi
+
+# Syntax highlight for zsh [zsh-syntax-highlighting]
+zplugin light zsh-users/zsh-syntax-highlighting
 
