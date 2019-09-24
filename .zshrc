@@ -21,11 +21,11 @@ zplugin light romkatv/powerlevel10k
 
 # Fuzzy finder [fzf]
 zplugin ice from"gh-r" as"program" mv"fzf* -> fzf"
-zplugin load junegunn/fzf-bin
+zplugin light junegunn/fzf-bin
 
 # dockerでfzfを使えるようにする
 zplugin ice pick"docker-fzf.zsh"
-zplugin load kwhrtsk/docker-fzf-completion
+zplugin light kwhrtsk/docker-fzf-completion
 
 # tmuxでfzfを使えるようにするプラグイン
 zplugin ice as"program" cp"bin/fzf-tmux -> fzf-tmuz"
@@ -33,11 +33,11 @@ zplugin ice as"program" cp"bin/fzf-tmux -> fzf-tmuz"
 # Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
 # cd **[TAB], vim **[TAB]などでファイル名を補完できる
 zplugin ice depth"1" multisrc"shell/key-bindings.zsh shell/completion.zsh"
-zplugin load junegunn/fzf
+zplugin light junegunn/fzf
 
 # next generation ls [exa]
 zplugin ice as"program" mv"exa* -> exa"
-zplugin load ogham/exa
+zplugin light ogham/exa
 
 # Auto suggestion [zsh-autosuggestions]
 zplugin light "zsh-users/zsh-autosuggestions"
@@ -47,7 +47,7 @@ zplugin light "zsh-users/zsh-completions"
 
 # cd enhance [enhancd]
 zplugin ice pick "init.sh"
-zplugin load "b4b4r07/enhancd"
+zplugin light "b4b4r07/enhancd"
 
 # cd to top directory of git []
 zplugin light "mollifier/cd-gitroot"
