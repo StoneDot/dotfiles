@@ -40,13 +40,14 @@ zplugin ice as"program" mv"exa* -> exa"
 zplugin light ogham/exa
 
 # Auto suggestion [zsh-autosuggestions]
-zplugin light "zsh-users/zsh-autosuggestions"
+zplugin ice wait atload'_zsh_autosuggest_start'
+zplugin light zsh-users/zsh-autosuggestions
 
 # Auto complete [zsh-completions]
 zplugin light "zsh-users/zsh-completions"
 
 # cd enhance [enhancd]
-zplugin ice pick "init.sh"
+zplugin ice wait'!0' pick "init.sh"
 zplugin light "b4b4r07/enhancd"
 
 # cd to top directory of git []
@@ -237,24 +238,11 @@ function gcopy() {
 # For Emacs
 source ~/.zsh.d/lib_open_via_emacs.sh
 
-# For docker
-source ~/.zsh.d/docker.zsh
-
 # For GHQ
 source ~/.zsh.d/ghq-cd.zsh
 
 # For google cloud
 source ~/.zsh.d/gimages.zsh
-
-# For kubectl
-if kubectl &> /dev/null; then
-  source <(kubectl completion zsh)
-fi
-
-# For stern
-if stern &> /dev/null; then
-  source <(stern --completion=zsh)
-fi
 
 ## Invoke the ``dired'' of current working directory in Emacs buffer.
 function dired () {
@@ -298,12 +286,6 @@ fi
 # Environment
 export SVN_EDITOR=/usr/bin/vim
 
-# The next lines enable nvm commands and completion
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-
 # Load rbenv settings
 if which rbenv &> /dev/null; then
   eval "$(rbenv init -)"
@@ -314,6 +296,36 @@ fi
 if which vim &> /dev/null; then
   export EDITOR=vim
 fi
+
+# For kubectl completion
+if kubectl &> /dev/null; then
+  if ! [ -f ${HOME}/.zsh.d/generated/kubectl.zsh ]; then
+    kubectl completion zsh > ${HOME}/.zsh.d/generated/kubectl.zsh
+  fi
+  zplugin snippet ${HOME}/.zsh.d/generated/kubectl.zsh
+fi
+
+# For docker completion
+zplugin load ~/.zsh.d/docker.zsh
+
+# For stern completion
+if stern &> /dev/null; then
+  if ! [ -f ${HOME}/.zsh.d/generated/stern.zsh ]; then
+    stern --completion=zsh > "${HOME}/.zsh.d/generated/stern.zsh"
+  fi
+  zplugin snippet ${HOME}/.zsh.d/generated/stern.zsh
+fi
+
+# Enable completion
+autoload -Uz compinit
+compinit
+zplugin cdreplay -q
+# zplugin cdlist
+
+# The next lines enable nvm commands and completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Syntax highlight for zsh [zsh-syntax-highlighting]
 zplugin light zsh-users/zsh-syntax-highlighting

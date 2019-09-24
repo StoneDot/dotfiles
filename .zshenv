@@ -1,3 +1,6 @@
+# Skip the not really helping Ubuntu global compinit
+skip_global_compinit=1
+
 # PATH configuration
 if [ -x /usr/libexec/path_helper ]; then
 	eval `/usr/libexec/path_helper -s`
