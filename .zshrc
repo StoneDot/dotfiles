@@ -46,10 +46,6 @@ zplugin light zsh-users/zsh-autosuggestions
 # Auto complete [zsh-completions]
 zplugin light "zsh-users/zsh-completions"
 
-# cd enhance [enhancd]
-zplugin ice wait'!0' pick "init.sh"
-zplugin light "b4b4r07/enhancd"
-
 # cd to top directory of git []
 zplugin light "mollifier/cd-gitroot"
 alias cdu='cd-gitroot'
@@ -59,6 +55,10 @@ zplugin light "chrissicool/zsh-256color"
 
 # zsh abbrev alias
 zplugin light "momo-lab/zsh-abbrev-alias"
+
+# Z commnad
+zplugin ice wait
+zplugin light rupa/z
 
 # Maximum history size 1M
 
@@ -181,6 +181,21 @@ function splotl() {
     for file in $@; do
         gnuplot -p -e "splot '$file' w lines" 
     done
+}
+
+# working directory history search
+function j () {
+    local result
+    if [ -z "$1" ]; then
+        result=$(z | sort -rn | awk '{print $2}' | fzf -1 +m --ansi --height 40% --reverse )
+    else
+      result=$(z | sort -rn | awk '{print $2}' | fzf -1 +m --ansi --height 40% --reverse -q "$1")
+    fi
+    if [ -n "$result" ]; then
+      cd $result
+    else
+      return 1
+    fi
 }
 
 # For git
