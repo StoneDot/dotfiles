@@ -302,6 +302,7 @@ if kubectl &> /dev/null; then
   if ! [ -f ${HOME}/.zsh.d/generated/kubectl.zsh ]; then
     kubectl completion zsh > ${HOME}/.zsh.d/generated/kubectl.zsh
   fi
+  zplugin ice wait
   zplugin snippet ${HOME}/.zsh.d/generated/kubectl.zsh
 fi
 
@@ -313,6 +314,7 @@ if stern &> /dev/null; then
   if ! [ -f ${HOME}/.zsh.d/generated/stern.zsh ]; then
     stern --completion=zsh > "${HOME}/.zsh.d/generated/stern.zsh"
   fi
+  zplugin ice wait
   zplugin snippet ${HOME}/.zsh.d/generated/stern.zsh
 fi
 
