@@ -129,11 +129,11 @@ alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 abbrev-alias gs="git status -s"
 abbrev-alias gcb="git checkout -b"
 abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change"
-abbrev-alias -g -e gpull="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin )"
-abbrev-alias -g -e gpush="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin )"
-abbrev-alias -g -e gupull="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull upstream )"
-abbrev-alias -g -e gupush="\$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push upstream )"
-abbrev-alias -g -e groot="\$(git rev-parse --show-toplevel 2> /dev/null)"
+abbrev-alias -g -e gpull='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin )'
+abbrev-alias -g -e gpush='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin )'
+abbrev-alias -g -e gupull='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull upstream )'
+abbrev-alias -g -e gupush='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push upstream )'
+abbrev-alias -g -e groot='$(git rev-parse --show-toplevel 2> /dev/null)'
 # tidy
 abbrev-alias tidy="tidy -utf8"
 
