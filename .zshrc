@@ -144,9 +144,24 @@ fi
 alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo docker rm"
 abbrev-alias dp="docker ps -a"
 abbrev-alias di="docker images"
-abbrev-alias dr="docker run --rm -ti"
-abbrev-alias de="docker exec -ti"
+abbrev-alias -g -e dr='docker run --rm -ti $(select-docker-image)'
+abbrev-alias -g -e de='docker exec -ti $(select-docker-ps)'
+abbrev-alias -g -e dbash='docker exec -ti $(select-docker-ps) /bin/bash'
+abbrev-alias -g -e dsh='docker exec -ti $(select-docker-ps) /bin/sh'
 abbrev-alias dc="docker-compose"
+
+function select-docker-image () {
+    local images image
+    images=$(docker images --format "{{.Repository}}:{{.Tag}}" | grep -v '<none>')
+    image=$(echo "${images}" | fzf +m --ansi --height 40% --reverse) || return $?
+    echo $image
+}
+function select-docker-ps () {
+    local containers container
+    containers=$(docker ps --format "[{{.Image}}] {{.Names}} {{.Command}}")
+    container=$(echo "${containers}" | fzf +m --ansi --height 40% --reverse) || return $?
+    echo "${container}" | awk '{print $2}'
+}
 
 # kubernetes
 abbrev-alias k="kubectl"
