@@ -53,7 +53,8 @@ ln -s ${CURRENT_DIR}/.zshenv ${HOME}/.zshenv
 ln -s ${CURRENT_DIR}/.zsh.d ${HOME}/.zsh.d
 ln -s ${CURRENT_DIR}/.vimrc ${HOME}/.vimrc
 ln -s ${CURRENT_DIR}/.tmux.conf ${HOME}/.tmux.conf
-
+mkdir -p ${HOME}/.config/alacritty
+ln -s ${CURRENT_DIR}/alacritty.xml ${HOME}/.config/alacritty/alacritty.yml
 
 # Install vim extensions
 vim +PluginInstall +qall
