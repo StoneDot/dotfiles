@@ -36,8 +36,13 @@ zplugin ice depth"1" multisrc"shell/key-bindings.zsh shell/completion.zsh"
 zplugin light junegunn/fzf
 
 # next generation ls [exa]
-zplugin ice as"program" mv"exa* -> exa"
-zplugin light ogham/exa
+if [ "$(uname)" = 'Darwin' ]; then
+  zplugin ice from"gh-r" as"program" mv"exa* -> exa" bpick"*macos*"
+  zplugin light ogham/exa
+else
+  zplugin ice as"program" mv"exa* -> exa"
+  zplugin light ogham/exa
+fi
 
 # Auto suggestion [zsh-autosuggestions]
 zplugin ice wait atload'_zsh_autosuggest_start'
@@ -91,7 +96,7 @@ elif dircolors -b &> /dev/null; then
   eval "`dircolors -b`"
 fi
 if ! exa &> /dev/null; then
-  if [ "$OS" = 'OSX' ]; then
+  if [ "$(uname)" = 'Darwin' ]; then
     alias ls='ls -G'
   else
     alias ls='ls --color=auto'
@@ -115,7 +120,7 @@ alias -g W="| wc"
 alias -g S="| sed"
 alias -g A="| ask"
 alias e='open_via_emacs_async'
-if [ "$OS" != 'OSX' ]; then
+if [ "$(uname)" != 'Darwin' ]; then
   alias pbcopy='xsel --clipboard --input'
   alias pbpaste='xsel --clipboard --output'
 fi
@@ -138,7 +143,7 @@ abbrev-alias -g -e groot='$(git rev-parse --show-toplevel 2> /dev/null)'
 abbrev-alias tidy="tidy -utf8"
 
 # docker
-if [ "$OS" != 'OSX' ]; then
+if [ "$(uname)" != 'Darwin' ]; then
   alias docker='sudo docker'
 fi
 alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo docker rm"
