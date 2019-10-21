@@ -25,6 +25,7 @@ Plugin 'challenger-deep-theme/vim', { 'name': 'challenger-deep' }
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'junegunn/fzf', { 'rtp': 'plugin' }
 Plugin 'junegunn/fzf.vim'
+Plugin 'terryma/vim-multiple-cursors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
