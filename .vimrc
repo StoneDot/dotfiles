@@ -126,7 +126,8 @@ hi IndentGuidesEven ctermbg=darkgrey
 let NERDTreeShowHidden = 1
 " C-e で NERDTree へ移動
 nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
-let g:nerdtree_tabs_open_on_console_startup=1
+" スタート時には NERDTree を表示しない
+" let g:nerdtree_tabs_open_on_console_startup=1
 
 " FuzzyFinder
 let g:fuf_modesDisable = []
