@@ -133,7 +133,7 @@ alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 # git
 abbrev-alias gs="git status -s"
 abbrev-alias gcb="git checkout -b"
-abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change"
+abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change -- . ':!*.map'"
 abbrev-alias -g -e gpull='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull origin )'
 abbrev-alias -g -e gpush='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git push origin )'
 abbrev-alias -g -e gupull='$(git status -uno &> /dev/null && git symbolic-ref --short HEAD | xargs echo git pull upstream )'
