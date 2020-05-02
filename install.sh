@@ -32,8 +32,11 @@ if [ $(uname) == "Darwin" ]; then
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
   sudo apt install vim git zsh
-  if which gnome-session &> /dev/null; then
+  session_type=$(loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | cut -d= -f2)
+  if [ $session_type = X11 ]; then
     sudo apt install vim-gnome
+  elif [ $session_type = wayland ]; then
+    sudo apt install wl-clipboard
   fi
 
   # Install nvm
