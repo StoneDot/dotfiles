@@ -86,6 +86,17 @@ setopt prompt_subst no_promptcr pushd_ignore_dups ignore_eof auto_pushd
 # C-w can eliminate a part of the path until slash
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
+# C-w work as kill-region in selection-mode
+function backward-kill-word-or-region() {
+    if [ $REGION_ACTIVE -eq 0 ]; then
+        zle backward-kill-word
+    else
+        zle kill-region
+    fi
+}
+zle -N backward-kill-word-or-region
+bindkey "^w" backward-kill-word-or-region
+
 # Completion settings
 setopt auto_list list_packed
 
