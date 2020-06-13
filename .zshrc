@@ -154,7 +154,11 @@ abbrev-alias -g -e groot='$(git rev-parse --show-toplevel 2> /dev/null)'
 abbrev-alias tidy="tidy -utf8"
 
 # docker
-if [ "$(uname)" != 'Darwin' ]; then
+ALLOW_DOCKER_ROOTLESS=0
+if [[ -n /etc/lsb-release && "$(uname)" = "Linux" ]]; then
+  ALLOW_DOCKER_ROOTLESS="$(echo "$(cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d= -f2) >= 20.04" | bc)"
+fi
+if [[ "$(uname)" != 'Darwin' && $ALLOW_DOCKER_ROOTLESS = 0 ]]; then
   alias docker='sudo docker'
 fi
 alias docker-rm-all="docker ps -a | tail +2 | awk '{print \$1}' | xargs sudo docker rm"
