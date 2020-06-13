@@ -132,8 +132,13 @@ alias -g S="| sed"
 alias -g A="| ask"
 alias e='open_via_emacs_async'
 if [ "$(uname)" != 'Darwin' ]; then
-  alias pbcopy='xsel --clipboard --input'
-  alias pbpaste='xsel --clipboard --output'
+  if which xsel >/dev/null; then
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
+  else
+    alias pbcopy='wl-copy'
+    alias pbpaste='wl-paste'
+  fi
 fi
 alias cmakedebug='cmake -DCMAKE_BUILD_TYPE=Debug'
 alias cmakerelease='cmake -DCMAKE_BUILD_TYPE=Release'
