@@ -398,7 +398,7 @@ zplugin cdreplay -q
 # The next lines enable nvm commands and completion
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Syntax highlight for zsh [zsh-syntax-highlighting]
 zplugin light zsh-users/zsh-syntax-highlighting
