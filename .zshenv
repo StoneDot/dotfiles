@@ -15,7 +15,8 @@ fi
 if [ -d $HOME/.zsh.d/commands ]; then
   PATH=$HOME/.zsh.d/commands:$PATH
 fi
-export PATH=$GOPATH/bin:$PATH
+export PATH="/usr/local/go/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export TERM=xterm-256color
 

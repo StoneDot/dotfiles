@@ -28,7 +28,7 @@ if [ $(uname) == "Darwin" ]; then
   # Reload PATH environment
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
-  sudo apt install neovim git zsh curl tmux build-essential rbenv virtualenv
+  sudo apt install neovim git zsh curl tmux build-essential rbenv virtualenv openjdk-15-dbg openjdk-15-doc openjdk-15-jdk openjdk-15-jre fd-find bat hexyl jq ripgrep
 
   # For install alacritty
   sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
@@ -61,6 +61,10 @@ elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "
 
   # Install nvm
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+  # Install go lang
+  curl -Lo- https://golang.org/dl/go1.15.3.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
+  mkdir -p ${HOME}/workspace/go
 fi
 
 # Return to original directory
