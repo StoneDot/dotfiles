@@ -28,7 +28,7 @@ if [ $(uname) == "Darwin" ]; then
   # Reload PATH environment
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
-  sudo apt install neovim git zsh curl tmux build-essential
+  sudo apt install neovim git zsh curl tmux build-essential rbenv virtualenv
 
   # For install alacritty
   sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev python3
