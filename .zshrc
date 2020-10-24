@@ -299,6 +299,9 @@ source ~/.zsh.d/ghq-cd.zsh
 # For google cloud
 source ~/.zsh.d/gimages.zsh
 
+# For general functions
+fpath+=~/.zsh.d/functions
+
 ## Invoke the ``dired'' of current working directory in Emacs buffer.
 function dired () {
   open_via_emacs_async -e "(dired \"${1:a}\")"
