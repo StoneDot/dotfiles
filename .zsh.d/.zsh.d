@@ -1,0 +1,1 @@
+/home/goto/dotfiles/.zsh.d

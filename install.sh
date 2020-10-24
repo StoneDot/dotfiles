@@ -19,9 +19,6 @@ if [ $(uname) == "Darwin" ]; then
   brew cask install java
   brew install plantuml
 
-  # Install zplug
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
   # Install go lang
   GO_INSTALLER=go1.12.7.darwin-amd64.pkg
   curl -sL -O https://dl.google.com/go/${GO_INSTALLER}
@@ -31,7 +28,7 @@ if [ $(uname) == "Darwin" ]; then
   # Reload PATH environment
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
-  sudo apt install vim git zsh
+  sudo apt install neovim git zsh curl
   session_type=$(loginctl show-session $(loginctl | grep $(whoami) | awk '{print $1}') -p Type | cut -d= -f2)
   if [ $session_type = X11 ]; then
     sudo apt install vim-gnome
@@ -42,9 +39,6 @@ elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "
   # Install nvm
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 fi
-
-# Install zplugin
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
 
 # Return to original directory
 popd
@@ -58,6 +52,9 @@ ln -s ${CURRENT_DIR}/.vimrc ${HOME}/.vimrc
 ln -s ${CURRENT_DIR}/.tmux.conf ${HOME}/.tmux.conf
 mkdir -p ${HOME}/.config/alacritty
 ln -s ${CURRENT_DIR}/alacritty.xml ${HOME}/.config/alacritty/alacritty.yml
+
+# Install zplugin
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
 
 # Install vim extensions
 vim +PluginInstall +qall
