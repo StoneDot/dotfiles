@@ -1,5 +1,8 @@
 # Lines configured by zsh-newuser-install
 
+# Delete duplication
+typeset -gU PATH
+
 # Load zprofile
 if [[ -f ${HOME}/.zprofile ]]; then
   source ${HOME}/.zprofile
