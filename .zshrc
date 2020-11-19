@@ -305,6 +305,11 @@ source ~/.zsh.d/gimages.zsh
 # For general functions
 fpath+=~/.zsh.d/functions
 
+# For linux brew completion
+if [[ -d /home/linuxbrew/.linuxbrew/share/zsh/site-functions ]]; then
+  fpath+=/home/linuxbrew/.linuxbrew/share/zsh/site-functions
+fi
+
 ## Invoke the ``dired'' of current working directory in Emacs buffer.
 function dired () {
   open_via_emacs_async -e "(dired \"${1:a}\")"

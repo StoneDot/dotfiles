@@ -31,3 +31,8 @@ fi
 if [[ -e /opt/intel/tbb/bin/tbbvars.sh ]]; then
     source /opt/intel/tbb/bin/tbbvars.sh intel64
 fi
+
+if [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
+    # For linux brew
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
