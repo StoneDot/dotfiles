@@ -18,6 +18,7 @@ fi
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-256color
 
 # For Intel MKL
