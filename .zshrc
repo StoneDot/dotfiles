@@ -416,3 +416,6 @@ export NVM_DIR="$HOME/.nvm"
 # Syntax highlight for zsh [zsh-syntax-highlighting]
 zplugin light zsh-users/zsh-syntax-highlighting
 abbrev-alias --init
+
+# added by travis gem
+[ ! -s /home/goto/.travis/travis.sh ] || source /home/goto/.travis/travis.sh
