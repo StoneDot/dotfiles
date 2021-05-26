@@ -177,7 +177,6 @@ abbrev-alias -g -e de='docker exec -ti $(select-docker-ps)'
 abbrev-alias -g -e dbash='docker exec -ti $(select-docker-ps) /bin/bash'
 abbrev-alias -g -e dsh='docker exec -ti $(select-docker-ps) /bin/sh'
 abbrev-alias dc="docker-compose"
-abbrev-alias glue-jupyter="docker run -itd --rm -p 8888:8888 -p 4040:4040 -v ~/.aws:/root/.aws:ro -v ~/workspace/notebooks:/home/jupyter/jupyter_default_dir --name glue_jupyter glue-dev-env:1.0.0 /home/jupyter/jupyter_start.sh"
 
 function select-docker-image () {
     local images image
@@ -203,6 +202,7 @@ abbrev-alias mstart="sudo microk8s.start"
 abbrev-alias ap="ansible-playbook --inventory-file=/usr/local/bin/terraform-inventory"
 
 # Glue
+abbrev-alias glue-jupyter="docker run -itd --rm -p 8888:8888 -p 4040:4040 -v ~/.aws:/root/.aws:ro -v ~/workspace/notebooks:/home/jupyter/jupyter_default_dir --name glue_jupyter glue-dev-env:1.0.0 /home/jupyter/jupyter_start.sh"
 alias runglue="docker run -itd -p 8888:8888 -p 4040:4040 -v ~/.aws:/root/.aws:ro -v ~/workspace/notebooks:/home/jupyter/jupyter_default_dir --name glue_jupyter amazon/aws-glue-libs:glue_libs_1.0.0_image_01 /home/jupyter/jupyter_start.sh"
 alias stopglue="docker stop glue_jupyter && docker rm glue_jupyter"
 
