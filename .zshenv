@@ -41,3 +41,19 @@ if [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ub
     # For linux brew
     eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
+
+# For Java
+if [[ -e /usr/lib/jvm/java-1.8.0-amazon-corretto ]]; then
+    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto
+fi
+
+# For hadoop
+if [[ -e ${HOME}/hadoop-3.3.0/bin ]] then
+    export PATH=${HOME}/hadoop-3.3.0/bin:$PATH
+fi
+if [[ -e ${HOME}/hadoop-3.3.0/sbin ]]; then
+    export PATH=${HOME}/hadoop-3.3.0/sbin:$PATH
+fi
+if [[ -e ${HOME}/spark-3.1.2-bin-hadoop3.2/bin ]]; then
+    export PATH=${HOME}/spark-3.1.2-bin-hadoop3.2/bin:$PATH
+fi
