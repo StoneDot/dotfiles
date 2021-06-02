@@ -21,6 +21,11 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export TERM=xterm-256color
 
+# For pip
+if [[ -e /home/goto/.local/bin ]]; then
+     PATH="$HOME/.local/bin:$PATH"
+fi
+
 # For Intel MKL
 if [[ -e /opt/intel/bin/compilervars.sh ]]; then
     source /opt/intel/bin/compilervars.sh intel64
