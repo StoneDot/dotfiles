@@ -403,8 +403,10 @@ if [[ $#h -gt 0 ]]; then
 fi
 
 # Enable completion
+autoload bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit
+complete -C '/usr/local/bin/aws_completer' aws
 zplugin cdreplay -q
 # zplugin cdlist
 
