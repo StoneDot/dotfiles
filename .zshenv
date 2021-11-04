@@ -17,8 +17,8 @@ if [ -d $HOME/.zsh.d/commands ]; then
 fi
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+. "$HOME/.cargo/env"
 export TERM=xterm-256color
 
 # For pip
