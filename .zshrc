@@ -456,8 +456,10 @@ export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Syntax highlight for zsh [zsh-syntax-highlighting]
-zplugin light zsh-users/zsh-syntax-highlighting
+# zsh-syntax-highlighting causes performance problem
+#zplugin light zsh-users/zsh-syntax-highlighting
 abbrev-alias --init
 
 # added by travis gem
 [ ! -s /home/goto/.travis/travis.sh ] || source /home/goto/.travis/travis.sh
+

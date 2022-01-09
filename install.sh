@@ -5,9 +5,8 @@ pushd $HOME
 
 if [ $(uname) == "Darwin" ]; then
   # Is MacOS
-  # Install zsh fzf, stern, kubectx/kubens, renger
   brew update
-  brew install zsh fzf stern kubectx ranger
+  brew install stern kubectx ranger
 
   # Install tools
   brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv
@@ -20,7 +19,7 @@ if [ $(uname) == "Darwin" ]; then
   brew install plantuml
 
   # Install go lang
-  GO_INSTALLER=go1.12.7.darwin-amd64.pkg
+  GO_INSTALLER=go1.17.2.darwin-arm64.pkg
   curl -sL -O https://dl.google.com/go/${GO_INSTALLER}
   sudo installer -pkg ${GO_INSTALLER} -target /
 

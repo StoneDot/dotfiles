@@ -17,8 +17,8 @@ if [ -d $HOME/.zsh.d/commands ]; then
 fi
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+. "$HOME/.cargo/env"
 export TERM=xterm-256color
 
 # For pip
@@ -37,9 +37,13 @@ if [[ -e /opt/intel/tbb/bin/tbbvars.sh ]]; then
     source /opt/intel/tbb/bin/tbbvars.sh intel64
 fi
 
-if [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
-    # For linux brew
-    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if [ $(uname) = "Linux" -a ]; then
+  if [ -e /etc/lsb-release ]; then
+    if [ $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
+      # For linux brew
+      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    fi
+  fi
 fi
 
 # For Java
