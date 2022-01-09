@@ -33,6 +33,26 @@ zplugin light kwhrtsk/docker-fzf-completion
 # tmuxでfzfを使えるようにするプラグイン
 zplugin ice as"program" cp"bin/fzf-tmux -> fzf-tmuz"
 
+# fzf で workdirectory を移動
+function cdworkdir() {
+    # カレントディレクトリが Git リポジトリ上かどうか
+    git rev-parse &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo fatal: Not a git repository.
+        return
+    fi
+
+    local selectedWorkTreeDir=`git worktree list | fzf | awk '{print $1}'`
+
+    if [ "$selectedWorkTreeDir" = "" ]; then
+        # Ctrl-C.
+        return
+    fi
+
+    cd ${selectedWorkTreeDir}
+}
+
+
 # Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
 # cd **[TAB], vim **[TAB]などでファイル名を補完できる
 zplugin ice depth"1" multisrc"shell/key-bindings.zsh shell/completion.zsh"
@@ -163,6 +183,7 @@ abbrev-alias tidy="tidy -utf8"
 
 # docker
 ALLOW_DOCKER_ROOTLESS=0
+export COMPOSE_DOCKER_CLI_BUILD=1
 if [[ -n /etc/lsb-release && "$(uname)" = "Linux" ]]; then
   ALLOW_DOCKER_ROOTLESS="$(echo "$(cat /etc/lsb-release | grep DISTRIB_RELEASE | cut -d= -f2) >= 20.04" | bc)"
 fi
@@ -247,6 +268,8 @@ function j () {
 }
 
 # For git
+
+# git checkout
 function gc () {
     local branches branch
     branches=$(git branch) &&
@@ -258,6 +281,7 @@ function gc () {
     git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //')
 }
 
+# git checkout from remote
 function gcr() {
     local branches branch
     branches=$(git branch -a) &&
@@ -269,6 +293,7 @@ function gcr() {
     git checkout $(echo "$branch" | awk '{print $1}' | sed 's/.* //' | sed 's$remotes/origin/$$')
 }
 
+# git branch delete
 function gbd() {
     local branches branch
     branches=$(git branch) &&
@@ -282,6 +307,7 @@ function gbd() {
     git branch -d $branch
 }
 
+# git branch select and copy
 function gb() {
     local branches
     branches=$(git branch -vv) &&
@@ -293,8 +319,22 @@ function gb() {
     echo "$branch" | sed 's/\* *//' | awk '{print $1}' | sed 's/.* //' | sed "s/\n//" | perl -pe 'chomp' | pbcopy
 }
 
+# git current head
 function gcopy() {
     git symbolic-ref --short HEAD | perl -pe 'chomp' | pbcopy
+}
+
+
+# git log
+function glog() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
 }
 
 
