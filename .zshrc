@@ -178,7 +178,7 @@ alias unbuffer='PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bi
 # git
 function gadd() {
     local selected
-    selected=$(unbuffer git status -s | fzf -m --ansi --preview="echo {} | awk '{print \$2}' | xargs git diff --color" | awk '{print $2}')
+    selected=$(unbuffer git status -s | fzf -m --ansi --preview="echo {} | awk '{print \$2}' | xargs git diff -P --color" | awk '{print $2}')
     if [[ -n "$selected" ]]; then
         selected=$(tr '\n' ' ' <<< "$selected")
 	git add "${(z)selected[@]}"
