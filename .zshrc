@@ -271,9 +271,9 @@ function splotl() {
 function j () {
     local result
     if [ -z "$1" ]; then
-        result=$(z | sort -rn | awk '{print $2}' | fzf -1 +m --ansi --height 40% --reverse )
+        result=$(zoxide query -l | fzf -1 +m --ansi --height 40% --reverse )
     else
-      result=$(z | sort -rn | awk '{print $2}' | fzf -1 +m --ansi --height 40% --reverse -q "$1")
+      result=$(zoxide query -l | fzf -1 +m --ansi --height 40% --reverse -q "$1")
     fi
     if [ -n "$result" ]; then
       cd $result
