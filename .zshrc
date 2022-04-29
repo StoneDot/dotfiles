@@ -94,6 +94,12 @@ setopt appendhistory autocd beep nomatch notify hist_ignore_dups
 
 # Emacs key binding
 bindkey -e
+# Bind ctrl+<left arrow>, ctrl+<right arrow> to move around words
+bindkey ";5C" forward-word
+bindkey ";5D" backward-word
+# Bind alt+<left arrow>, alt+<right arrow> to move around arguments
+bindkey ";3C" vi-forward-blank-word
+bindkey ";3D" vi-backward-blank-word
 
 # Move completion options using C-f, C-b, C-p, C-n
 zstyle ':completion:*:default' menu select=1
