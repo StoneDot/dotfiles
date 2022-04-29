@@ -171,7 +171,20 @@ alias cmakedebugicpc='cmakedebug -DCMAKE_CXX_COMPILER=icpc'
 alias cmakereleaseicpc='cmakerelease -DCMAKE_CXX_COMPILER=icpc'
 alias cmakedebugclang++='cmakedebug -DCMAKE_CXX_COMPILER=clang++'
 alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
+
+# expect
+alias unbuffer='PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin unbuffer'
+
 # git
+function gadd() {
+    local selected
+    selected=$(unbuffer git status -s | fzf -m --ansi --preview="echo {} | awk '{print \$2}' | xargs git diff --color" | awk '{print $2}')
+    if [[ -n "$selected" ]]; then
+        selected=$(tr '\n' ' ' <<< "$selected")
+	git add "${(z)selected[@]}"
+        echo "Completed: git add $selected"
+    fi
+}
 abbrev-alias gs="git status -s"
 abbrev-alias gcb="git checkout -b"
 abbrev-alias gd="git diff --histogram --indent-heuristic --ignore-space-change -- . ':!*.map'"

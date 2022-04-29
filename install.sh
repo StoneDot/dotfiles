@@ -9,7 +9,7 @@ if [ $(uname) == "Darwin" ]; then
   brew install stern kubectx ranger
 
   # Install tools
-  brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv zoxide
+  brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv zoxide expect
   brew tap wagoodman/dive
   brew install dive
   brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git
@@ -64,9 +64,12 @@ elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "
   # Install go lang
   curl -Lo- https://golang.org/dl/go1.15.3.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
   mkdir -p ${HOME}/workspace/go
+
+  # Install expect
+  sudo apt-get install expect
 fi
 
-if [ $(uname) == "Darwin" ]; then
+if [ $(uname) == "Linux" ]; then
   curl -sS https://webinstall.dev/zoxide | bash
 fi
 # Return to original directory
