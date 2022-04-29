@@ -84,10 +84,6 @@ zplugin light "chrissicool/zsh-256color"
 # zsh abbrev alias
 zplugin light "momo-lab/zsh-abbrev-alias"
 
-# Z commnad
-zplugin ice wait
-zplugin light rupa/z
-
 # Maximum history size 1M
 
 HISTFILE=~/.histfile
@@ -449,6 +445,9 @@ compinit
 complete -C '/usr/local/bin/aws_completer' aws
 zplugin cdreplay -q
 # zplugin cdlist
+
+# Enable zoxide
+eval "$(zoxide init zsh)"
 
 # The next lines enable nvm commands and completion
 export NVM_DIR="$HOME/.nvm"

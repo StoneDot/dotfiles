@@ -9,7 +9,7 @@ if [ $(uname) == "Darwin" ]; then
   brew install stern kubectx ranger
 
   # Install tools
-  brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv
+  brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv zoxide
   brew tap wagoodman/dive
   brew install dive
   brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git
@@ -66,6 +66,9 @@ elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "
   mkdir -p ${HOME}/workspace/go
 fi
 
+if [ $(uname) == "Darwin" ]; then
+  curl -sS https://webinstall.dev/zoxide | bash
+fi
 # Return to original directory
 popd
 
