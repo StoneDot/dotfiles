@@ -242,6 +242,10 @@ abbrev-alias glue-jupyter="docker run -itd --rm -p 8888:8888 -p 4040:4040 -v ~/.
 alias runglue="docker run -itd -p 8888:8888 -p 4040:4040 -v ~/.aws:/root/.aws:ro -v ~/workspace/notebooks:/home/jupyter/jupyter_default_dir --name glue_jupyter amazon/aws-glue-libs:glue_libs_1.0.0_image_01 /home/jupyter/jupyter_start.sh"
 alias stopglue="docker stop glue_jupyter && docker rm glue_jupyter"
 
+# CDK alias
+alias cdk1="npx aws-cdk@1.x"
+alias cdk2="npx aws-cdk@2.x"
+
 # For gnuplot
 function plot () {
     for file in $@; do
