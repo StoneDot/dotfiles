@@ -12,10 +12,24 @@ fi
 # zinit
 #--------------------------------------------------
 ### Added by Zinit's installer
-source "${HOME}/.zinit/bin/zinit.zsh"
+if [[ -f "${HOME}/.zinit/bin/zinit.zsh" ]]; then
+  source "${HOME}/.zinit/bin/zinit.zsh"
+fi
+if [[ -f "${HOME}/.local/share/zinit/zinit.git/zinit.zsh" ]]; then
+  source "${HOME}/.local/share/zinit/zinit.git/zinit.zsh"
+fi
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zplugin installer's chunk
+### End of Zinit's installer chunk
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+  zdharma-continuum/zinit-annex-as-monitor \
+  zdharma-continuum/zinit-annex-bin-gem-node \
+  zdharma-continuum/zinit-annex-patch-dl \
+  zdharma-continuum/zinit-annex-rust
 
 # Prompt theme [powerlevel10k]
 zplugin light romkatv/powerlevel10k
