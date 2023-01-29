@@ -484,7 +484,7 @@ zplugin cdreplay -q
 # zplugin cdlist
 
 # Enable zoxide
-eval "$(zoxide init zsh)"
+eval "$(/home/goto/.local/bin/zoxide init zsh)"
 
 # The next lines enable nvm commands and completion
 export NVM_DIR="$HOME/.nvm"
