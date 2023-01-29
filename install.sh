@@ -59,10 +59,10 @@ elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "
   fi
 
   # Install nvm
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
   # Install go lang
-  curl -Lo- https://golang.org/dl/go1.15.3.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
+  curl -Lo- https://go.dev/dl/go1.19.5.linux-amd64.tar.gz | sudo tar -C /usr/local -xz
   mkdir -p ${HOME}/workspace/go
 
   # Install expect
