@@ -59,6 +59,9 @@ fi
 # Return to original directory
 popd
 
+# Install git-delta
+cargo install git-delta
+
 # Install dotfiles
 CURRENT_DIR=$(cd $(dirname $0) | pwd)
 ln -s ${CURRENT_DIR}/.zshrc ${HOME}/.zshrc
