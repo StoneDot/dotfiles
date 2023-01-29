@@ -62,6 +62,18 @@ popd
 # Install git-delta
 cargo install git-delta
 
+# Add configuration for git
+git config --global user.email "goto.inct@gmail.com"
+git config --global user.name "Hiroaki Goto"
+git config --global core.autocrlf input
+git config --global core.whitespace cr-at-eol
+git config --global merge.conflictstyle diff3
+git config --global core.pager delta
+git config --global interactive.difffilter "delta --color-only"
+git config --global delta.navigate true
+git config --global delta.line-numbers true
+git config --global diff.colormoved default
+
 # Install dotfiles
 CURRENT_DIR=$(cd $(dirname $0) | pwd)
 ln -s ${CURRENT_DIR}/.zshrc ${HOME}/.zshrc
