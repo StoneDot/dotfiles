@@ -22,18 +22,8 @@ if [ -d $HOME/go/bin ]; then
 fi
 export PATH
 . "$HOME/.cargo/env"
-export TERM=xterm-256color
 
-# For Intel MKL
-if [[ -e /opt/intel/bin/compilervars.sh ]]; then
-    source /opt/intel/bin/compilervars.sh intel64
-fi
-if [[ -e /opt/intel/mkl/bin/mklvars.sh ]]; then
-    source /opt/intel/mkl/bin/mklvars.sh intel64
-fi
-if [[ -e /opt/intel/tbb/bin/tbbvars.sh ]]; then
-    source /opt/intel/tbb/bin/tbbvars.sh intel64
-fi
+export TERM=xterm-256color
 
 if [ $(uname) = "Linux" -a ]; then
   if [ -e /etc/lsb-release ]; then
@@ -47,15 +37,4 @@ fi
 # For Java
 if [[ -e /usr/lib/jvm/java-1.8.0-amazon-corretto ]]; then
     export JAVA_HOME=/usr/lib/jvm/java-1.8.0-amazon-corretto
-fi
-
-# For hadoop
-if [[ -e ${HOME}/hadoop-3.3.0/bin ]] then
-    export PATH=${HOME}/hadoop-3.3.0/bin:$PATH
-fi
-if [[ -e ${HOME}/hadoop-3.3.0/sbin ]]; then
-    export PATH=${HOME}/hadoop-3.3.0/sbin:$PATH
-fi
-if [[ -e ${HOME}/spark-3.1.2-bin-hadoop3.2/bin ]]; then
-    export PATH=${HOME}/spark-3.1.2-bin-hadoop3.2/bin:$PATH
 fi
