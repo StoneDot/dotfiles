@@ -3,28 +3,26 @@ skip_global_compinit=1
 
 # PATH configuration
 if [ -x /usr/libexec/path_helper ]; then
-	eval `/usr/libexec/path_helper -s`
+  eval `/usr/libexec/path_helper -s`
 fi
-export GOPATH=$HOME/workspace/go
 if [ -d /opt/p4v/bin ]; then
-  PATH=/opt/p4v/bin:$PATH
-fi
-if [ -d $HOME/go/bin ]; then
-  PATH=$HOME/go/bin:$PATH
+  path=("/opt/p4v/bin" $path)
 fi
 if [ -d $HOME/.zsh.d/commands ]; then
-  PATH=$HOME/.zsh.d/commands:$PATH
+  path=($HOME/.zsh.d/commands $path)
 fi
-export PATH="/usr/local/go/bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+if [ -d $HOME/.local/bin ]; then
+  path=("$HOME/.local/bin" $path)
+fi
+if [ -d /home/goto/go/bin ]; then
+  path=("/usr/local/go/bin" $path)
+fi
+if [ -d $HOME/go/bin ]; then
+  path=("$HOME/go/bin" $path)
+fi
+export PATH
 . "$HOME/.cargo/env"
 export TERM=xterm-256color
-
-# For pip
-if [[ -e /home/goto/.local/bin ]]; then
-     PATH="$HOME/.local/bin:$PATH"
-fi
 
 # For Intel MKL
 if [[ -e /opt/intel/bin/compilervars.sh ]]; then
