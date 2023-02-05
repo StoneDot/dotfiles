@@ -3,6 +3,16 @@
 # Move to home directory
 pushd $HOME
 
+# Install dotfiles
+CURRENT_DIR=$(cd $(dirname $0) | pwd)
+ln -s ${CURRENT_DIR}/.zshrc ${HOME}/.zshrc
+ln -s ${CURRENT_DIR}/.zshenv ${HOME}/.zshenv
+ln -s ${CURRENT_DIR}/.zsh.d ${HOME}/.zsh.d
+ln -s ${CURRENT_DIR}/.vimrc ${HOME}/.vimrc
+ln -s ${CURRENT_DIR}/.tmux.conf ${HOME}/.tmux.conf
+mkdir -p ${HOME}/.config/alacritty
+ln -s ${CURRENT_DIR}/alacritty.xml ${HOME}/.config/alacritty/alacritty.yml
+
 if [ $(uname) == "Darwin" ]; then
   # Is MacOS
   brew update
@@ -27,7 +37,7 @@ if [ $(uname) == "Darwin" ]; then
   # Reload PATH environment
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
-  sudo apt install neovim git zsh curl tmux build-essential rbenv virtualenv fd-find bat hexyl jq ripgrep tidy exa powerline bc
+  sudo apt install neovim git zsh curl tmux build-essential rbenv virtualenv fd-find bat hexyl jq ripgrep tidy exa powerline bc socat
 
   # Install rust env
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -74,15 +84,8 @@ git config --global delta.navigate true
 git config --global delta.line-numbers true
 git config --global diff.colormoved default
 
-# Install dotfiles
-CURRENT_DIR=$(cd $(dirname $0) | pwd)
-ln -s ${CURRENT_DIR}/.zshrc ${HOME}/.zshrc
-ln -s ${CURRENT_DIR}/.zshenv ${HOME}/.zshenv
-ln -s ${CURRENT_DIR}/.zsh.d ${HOME}/.zsh.d
-ln -s ${CURRENT_DIR}/.vimrc ${HOME}/.vimrc
-ln -s ${CURRENT_DIR}/.tmux.conf ${HOME}/.tmux.conf
-mkdir -p ${HOME}/.config/alacritty
-ln -s ${CURRENT_DIR}/alacritty.xml ${HOME}/.config/alacritty/alacritty.yml
+# Install GHQ
+go install github.com/x-motemen/ghq@latest
 
 # Install zplugin
 bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
