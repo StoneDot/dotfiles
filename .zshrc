@@ -37,8 +37,13 @@ zplugin light romkatv/powerlevel10k
 [[ -f ~/.zsh.d/p10k.zsh ]] && source ~/.zsh.d/p10k.zsh
 
 # Fuzzy finder [fzf]
-zplugin ice from"gh-r" as"program" mv"fzf* -> fzf"
-zplugin light junegunn/fzf-bin
+# Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
+# cd **[TAB], vim **[TAB]などでファイル名を補完できる
+zi for \
+    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
+zi ice from"gh-r" as"program" 
+zi light junegunn/fzf
+
 
 # dockerでfzfを使えるようにする
 zplugin ice pick"docker-fzf.zsh"
@@ -65,12 +70,6 @@ function cdworkdir() {
 
     cd ${selectedWorkTreeDir}
 }
-
-
-# Ctrl-Rで履歴検索、Ctrl-Tでファイル名検索補完できる
-# cd **[TAB], vim **[TAB]などでファイル名を補完できる
-zplugin ice depth"1" multisrc"shell/key-bindings.zsh shell/completion.zsh"
-zplugin light junegunn/fzf
 
 # next generation ls [exa]
 if [ "$(uname)" = 'Darwin' ]; then
