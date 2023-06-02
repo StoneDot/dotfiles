@@ -20,6 +20,9 @@ fi
 if [ -d $HOME/go/bin ]; then
   path=("$HOME/go/bin" $path)
 fi
+if [ -d /usr/lib/cargo/bin ]; then
+  path=("/usr/lib/cargo/bin/" $path)
+fi
 export PATH
 . "$HOME/.cargo/env"
 
