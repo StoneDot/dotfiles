@@ -21,12 +21,12 @@ if [ $? -ne 0 ]; then
   brew update
 fi
 
-if [ $(uname) == "Darwin" ]; then
-  # Is MacOS
-  brew install stern kubectx ranger
+# Install common tools
+brew install neovim git kubectx tidy-html5 stern tldr tmux
 
+if [ $(uname) == "Darwin" ]; then
   # Install tools
-  brew install fd bat bash git hexyl jq kubectx tidy-html5 php q stern tig tldr tmux vim python rbenv zoxide expect
+  brew install fd jq bat bash hexyl zoxide php tig vim python rbenv expect
   brew tap wagoodman/dive
   brew install dive
   brew tap burntsushi/ripgrep https://github.com/BurntSushi/ripgrep.git
@@ -44,7 +44,7 @@ if [ $(uname) == "Darwin" ]; then
   # Reload PATH environment
   eval `/usr/libexec/path_helper -s`
 elif [ $(uname) = "Linux" -a $(cat /etc/lsb-release | head -1 | cut -d= -f2) = "Ubuntu" ]; then
-  sudo apt install neovim git zsh curl tmux build-essential rbenv virtualenv fd-find bat hexyl jq ripgrep tidy exa powerline bc socat
+  sudo apt install git zsh curl tmux build-essential rbenv virtualenv fd-find bat hexyl jq ripgrep tidy exa powerline bc socat
 
   # Install rust env
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
