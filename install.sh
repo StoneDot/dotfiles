@@ -13,9 +13,16 @@ ln -s ${CURRENT_DIR}/.tmux.conf ${HOME}/.tmux.conf
 mkdir -p ${HOME}/.config/alacritty
 ln -s ${CURRENT_DIR}/alacritty.xml ${HOME}/.config/alacritty/alacritty.yml
 
+# Install homebrew for Linux
+which brwe &> /dev/null
+if [ $? -ne 0 ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  brew update
+fi
+
 if [ $(uname) == "Darwin" ]; then
   # Is MacOS
-  brew update
   brew install stern kubectx ranger
 
   # Install tools
