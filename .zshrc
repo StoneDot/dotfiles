@@ -185,6 +185,9 @@ alias cmakereleaseicpc='cmakerelease -DCMAKE_CXX_COMPILER=icpc'
 alias cmakedebugclang++='cmakedebug -DCMAKE_CXX_COMPILER=clang++'
 alias cmakereleaseclang++='cmakerelease -DCMAKE_CXX_COMPILER=clang++'
 
+# replace vim into nvim
+alias vim=nvim
+
 # expect
 alias unbuffer='PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin unbuffer'
 

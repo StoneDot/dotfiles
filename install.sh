@@ -13,6 +13,10 @@ ln -s ${CURRENT_DIR}/.tmux.conf ${HOME}/.tmux.conf
 mkdir -p ${HOME}/.config/alacritty
 ln -s ${CURRENT_DIR}/alacritty.xml ${HOME}/.config/alacritty/alacritty.yml
 
+# Install neovim config
+mkdir -p ${HOME}/.config/nvim/
+ln -s ${CURRENT_DIR}/init.vim ${HOME}/.config/nvim/init.vim
+
 # Install homebrew for Linux
 which brwe &> /dev/null
 if [ $? -ne 0 ]; then
