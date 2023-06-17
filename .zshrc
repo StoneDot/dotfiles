@@ -73,7 +73,7 @@ function cdworkdir() {
 
 # next generation ls [exa]
 if [ "$(uname)" = 'Darwin' ]; then
-  zplugin ice from"gh-r" as"program" mv"exa* -> exa" bpick"*macos*"
+  zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
   zplugin light ogham/exa
 else
   zplugin ice as"program" mv"exa* -> exa"
@@ -113,6 +113,9 @@ bindkey ";5D" backward-word
 # Bind alt+<left arrow>, alt+<right arrow> to move around arguments
 bindkey ";3C" vi-forward-blank-word
 bindkey ";3D" vi-backward-blank-word
+
+# Add path for completion
+fpath=(~/.zsh/completion $fpath)
 
 # Move completion options using C-f, C-b, C-p, C-n
 zstyle ':completion:*:default' menu select=1
@@ -261,6 +264,16 @@ alias stopglue="docker stop glue_jupyter && docker rm glue_jupyter"
 # CDK alias
 alias cdk1="npx aws-cdk@1.x"
 alias cdk2="npx aws-cdk@2.x"
+
+# Python
+if [[ -n "$HOME/.pythonstartup" ]]; then
+  export PYTHONSTARTUP=$HOME/.pythonstartup
+fi
+
+# JSON utils
+json_escape () {
+    printf '%s' "$1" | python -c 'import json,sys; print(json.dumps(sys.stdin.read()))'
+}
 
 # For gnuplot
 function plot () {
@@ -418,6 +431,10 @@ function cde () {
 
 # Add ssh key if not added yet.
 if [ -S "$SSH_AUTH_SOCK" ]; then
+  ssh-add -l &> /dev/null
+  if [ $? != 0 -a "$(uname)" = "Darwin" ]; then
+    ssh-add --apple-load-keychain
+  fi
   if ! ssh-add -l > /dev/null; then
     if [ -f "$HOME/.ssh/id_rsa" ]; then
       ssh-add "$HOME/.ssh/id_rsa"
@@ -486,7 +503,9 @@ zplugin cdreplay -q
 # zplugin cdlist
 
 # Enable zoxide
-eval "$(/home/goto/.local/bin/zoxide init zsh)"
+if [[ -e /home/goto/.local/bin/zoxide ]]; then
+  eval "$(/home/goto/.local/bin/zoxide init zsh)"
+fi
 
 # The next lines enable nvm commands and completion
 export NVM_DIR="$HOME/.nvm"
@@ -524,4 +543,20 @@ abbrev-alias --init
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+export JAVA_TOOLS_OPTIONS="-Dlog4j2.formatMsgNoLookups=true"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/hiroag/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/hiroag/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/hiroag/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/hiroag/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

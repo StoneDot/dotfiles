@@ -40,7 +40,7 @@ if [ $(uname) == "Darwin" ]; then
   brew install plantuml
 
   # Install go lang
-  GO_INSTALLER=go1.17.2.darwin-arm64.pkg
+  GO_INSTALLER=go1.17.5.darwin-arm64.pkg
   curl -sL -O https://dl.google.com/go/${GO_INSTALLER}
   sudo installer -pkg ${GO_INSTALLER} -target /
 
