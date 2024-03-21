@@ -1,10 +1,11 @@
 #!/bin/bash
 
+CURRENT_DIR=$(cd $(dirname $0) | pwd)
+
 # Move to home directory
 pushd $HOME
 
 # Install dotfiles
-CURRENT_DIR=$(cd $(dirname $0) | pwd)
 ln -s ${CURRENT_DIR}/.zshrc ${HOME}/.zshrc
 ln -s ${CURRENT_DIR}/.zshenv ${HOME}/.zshenv
 ln -s ${CURRENT_DIR}/.zsh.d ${HOME}/.zsh.d
