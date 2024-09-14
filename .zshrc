@@ -505,8 +505,8 @@ zplugin cdreplay -q
 # zplugin cdlist
 
 # Enable zoxide
-if [[ -e /home/goto/.local/bin/zoxide ]]; then
-  eval "$(/home/goto/.local/bin/zoxide init zsh)"
+if which zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
 fi
 
 # The next lines enable nvm commands and completion
