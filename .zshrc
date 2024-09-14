@@ -144,10 +144,12 @@ setopt auto_list list_packed
 # Colorize basic commands
 if exa &> /dev/null; then
   alias ls=exa
+elif eza &> /dev/null; then
+  alias ls=eza
 elif dircolors -b &> /dev/null; then
   eval "`dircolors -b`"
 fi
-if ! exa &> /dev/null; then
+if ! alias | egrep '^ls=' &> /dev/null; then
   if [ "$(uname)" = 'Darwin' ]; then
     alias ls='ls -G'
   else
