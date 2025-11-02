@@ -115,7 +115,7 @@ bindkey ";3C" vi-forward-blank-word
 bindkey ";3D" vi-backward-blank-word
 
 # Add path for completion
-fpath=(~/.zsh/completion $fpath)
+fpath=(~/.zsh/completion ~/.zsh.d/completion $fpath)
 
 # Move completion options using C-f, C-b, C-p, C-n
 zstyle ':completion:*:default' menu select=1
